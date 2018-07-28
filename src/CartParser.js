@@ -47,7 +47,7 @@ class CartParser {
         const 
             contents = this.readFile(path),
             validationErrors = this.validate(contents);
-        //1 unit-test
+        
         if (validationErrors.length > 0) {
             console.error(validationErrors);
             throw Error('Validation failed!');
@@ -109,7 +109,7 @@ class CartParser {
             const cells = bodyLines[i].split(/,/).map(c => c.trim());
 
             if (cells.length < this.schema.columns.length) {
-                errors.push(this.createError(//3
+                errors.push(this.createError(
                     this.ErrorType.ROW,
                     i + 1,
                     -1,
@@ -125,7 +125,7 @@ class CartParser {
 
                 switch (columnType) {
                     case this.ColumnType.STRING: {
-                        if (!cell) {//4
+                        if (!cell) {
                             errors.push(this.createError(
                                 this.ErrorType.CELL,
                                 i + 1,
@@ -141,7 +141,7 @@ class CartParser {
                             typeof(cellAsNumber) != 'number' || 
                             Number.isNaN(cellAsNumber) || 
                             cellAsNumber < 0
-                        ) {//5
+                        ) {
                             errors.push(this.createError(
                                 this.ErrorType.CELL,
                                 i + 1,
@@ -180,7 +180,7 @@ class CartParser {
                 type = types[i],
                 key = keys[i],
                 value = values[i],
-                valueTyped = type === this.ColumnType.NUMBER_POSITIVE ? Number(value) : value;//6
+                valueTyped = type === this.ColumnType.NUMBER_POSITIVE ? Number(value) : value;
 
             item[key] = valueTyped;
         }
